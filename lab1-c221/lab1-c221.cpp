@@ -14,24 +14,18 @@ template<typename T> void fV(vector<T>& v) {
     for (auto& x : v) { ++x; }
 }
 
-template<typename U, typename T> void InsertUnique(vector<U>& v, T&& last)
+
+template<typename U, typename T, typename... Types> 
+constexpr void InsertUnique(vector<U>& v, T&& current, Types&&... rest)
 {
-    //U* d = dynamic_cast<U&>(last);
-    if (is_convertible_v<U, T>)
+    if constexpr (is_convertible_v<U, T>)
     {
-        T d = static_cast<T>(last);
-        cout << d << endl;
-        //if (find(v.begin(), v.end(), d) == v.end())
-        //{
-        //    cout << d<<endl;
-        //    //v.push_back(d);
-        //}
+        auto d = find(v.begin(), v.end(), static_cast<U>(current));
+        if (d == v.end())
+            v.push_back(current);
     }
-}
-template<typename U, typename T, typename... Types> void InsertUnique(vector<U>& v, T&& current, Types&&... rest)
-{
-    InsertUnique(v, forward<Types>(rest)...);
-    InsertUnique(v, current);
+    if constexpr (sizeof...(rest)>0)
+        InsertUnique(v, forward<Types>(rest)...);
 }
 
 int main()
@@ -41,5 +35,5 @@ int main()
     fV(v); //в результате вызова fV a,b,c должны измениться!!!
 
     vector v1{ 4,7, 1 };
-    InsertUnique(v1, 1.1, string("qwerty"), 5.2);
+    InsertUnique(v1, 1.1f, string("qwerty"), 5.2, "qwerty",'c');
 }
