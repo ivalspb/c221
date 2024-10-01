@@ -45,15 +45,15 @@ constexpr void functions_with_arg_folded(U& x, Types&&... functions)
 template <typename U, typename T, typename... Types>
 constexpr void func_any_param(U&& func, T&& cur, Types&&... rest)
 {
-    func(cur);
+    forward<U>(func)(cur);
     if constexpr (sizeof...(rest) > 0)
-        func_any_param(func,forward<Types>(rest)...);
+        func_any_param(forward<U>(func),forward<Types>(rest)...);
 }
 
 template <typename U,  typename... Types>
 constexpr void func_any_param_folded(U&& func, Types&&... rest)
 {
-    (func(forward<Types>(rest)), ...);
+    (forward<U>(func)(forward<Types>(rest)), ...);
 }
 
 
