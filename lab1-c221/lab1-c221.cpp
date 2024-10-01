@@ -36,10 +36,24 @@ constexpr void functions_with_arg(U& x,  T&& cur_func,  Types&&... rest_function
         functions_with_arg(x, forward<Types>(rest_functions)...);
 }
 
-template <typename U, typename T, typename... Types>
+template <typename U,  typename... Types>
 constexpr void functions_with_arg_folded(U& x, Types&&... functions)
 {
     (forward<Types>(functions)(x), ...);
+}
+
+template <typename U, typename T, typename... Types>
+constexpr void func_any_param(U&& func, T&& cur, Types&&... rest)
+{
+    func(cur);
+    if constexpr (sizeof...(rest) > 0)
+        func_any_param(func,forward<Types>(rest)...);
+}
+
+template <typename U,  typename... Types>
+constexpr void func_any_param_folded(U&& func, Types&&... rest)
+{
+    (func(forward<Types>(rest)), ...);
 }
 
 
@@ -65,9 +79,10 @@ int main()
     
 
     functions_with_arg(d1, [delta](auto& d) {d += delta; },decr_any<double>);
-
     functions_with_arg_folded(d3, [delta](auto& d) {d -= delta; }, decr_any<double>);
 
+    func_any_param(decr_any<double>, d1, d2, d3);
+    func_any_param_folded([delta](auto& d) {d *= delta; }, d1, d2, d3);
 
     //требуется определить сколько элементов совпадающих с перечисленными в паке значениями содержит последовательность (обобщенный контейнер).
     /*vector v{ 1,2,3,4,5 };
