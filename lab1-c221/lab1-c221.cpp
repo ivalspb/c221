@@ -1,4 +1,4 @@
-﻿// Практическое занятие 1
+// Практическое занятие 1
 //std::forward, std::ref, variadic функции, folds
 
 
@@ -15,7 +15,7 @@ template<typename T> void fV(vector<T>& v) {
 }
 
 
-template<typename U, typename T, typename... Types> 
+template<typename U, typename T, typename... Types>
 constexpr void InsertUnique(vector<U>& v, T&& current, Types&&... rest)
 {
     if constexpr (is_convertible_v<U, T>)
@@ -24,7 +24,7 @@ constexpr void InsertUnique(vector<U>& v, T&& current, Types&&... rest)
         if (d == v.end())
             v.push_back(current);
     }
-    if constexpr (sizeof...(rest)>0)
+    if constexpr (sizeof...(rest) > 0)
         InsertUnique(v, forward<Types>(rest)...);
 }
 
@@ -35,5 +35,12 @@ int main()
     fV(v); //в результате вызова fV a,b,c должны измениться!!!
 
     vector v1{ 4,7, 1 };
-    InsertUnique(v1, 1.1f, string("qwerty"), 5.2, "qwerty",'c');
+    InsertUnique(v1, 1.1f, string("qwerty"), 5.2, "qwerty", 'c');
+
+    //требуется определить сколько элементов совпадающих с перечисленными в паке значениями содержит последовательность (обобщенный контейнер).
+    vector v{ 1,2,3,4,5 };
+    size_t n1 = mathches(v, 2, 5);
+    size_t n2 = mathches(v, 100, 200);
+    size_t n3 = mathches("abcdefg", 'x', 'y', 'z');
+    size_t n4 = mathches("abcdefg", 'a', 'd', 'f');
 }
