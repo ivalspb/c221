@@ -7,16 +7,17 @@ class MyStack
 {
 	class Node
 	{
+		friend class MyStack;
 		T val;
 		Node* next = nullptr;
 	public:
-		Node() = default;
+		Node() :val(T{}) {};
 		Node(T& _val) : val(_val) {};
 		Node(T&& _val) : val(std::move(_val)) {};
 	};
 	Node m_head;
 public:
-	MyStack() = default;
+	MyStack() {};
 	/*void push(T&& v)
 	{
 		Node* n = new Node(std::forward<T>(v));
@@ -32,22 +33,24 @@ public:
 			m_head.next = tmp;
 		}
 	}
+	template <typename T, typename... Types>
 	void push(T&& v, Types&&... args)
 	{
 		Node* n = new Node(std::forward<T>(v));
 		n->next = m_head.next;
 		m_head.next = n;
 		if constexpr (sizeof...(args) > 0)
-			this->push(std::forward<Types>(args));
+			this->push(std::forward<Types>(args)...);
 	}
+	template <typename... Types>
 	MyStack(Types&&... args)
 	{
 		if constexpr (sizeof...(args) > 0)
-			push(std::forward<Types>(args));
+			push(std::forward<Types>(args)...);
 	}
 	~MyStack()
 	{
-		while (m_head->next) pop();
+		while (m_head.next) pop();
 	}
 	MyStack(MyStack&) = delete;
 	MyStack(MyStack&&) = delete;

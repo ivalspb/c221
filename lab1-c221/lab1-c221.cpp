@@ -59,7 +59,6 @@ constexpr void func_any_param_folded(U&& func, Types&&... rest)
 }
 
 
-//template <typename C::value_type=T, typename T >
 
 template <typename T>
 void decr_any(T& t)
@@ -97,6 +96,7 @@ int main()
     Point<int> pt(1, 1);
     s.push(pt); //добавить в стек копию lvalue
     s.push(Point(2, 2)); //переместить в стек из rvalue
-
-
+    Point pt1(4, 4);
+    s.push(pt, Point(5, 5), pt1, Point(6, 6));
+    MyStack <Point<int>> s1(pt, Point(7, 7), pt1, Point(8, 8));
 }
