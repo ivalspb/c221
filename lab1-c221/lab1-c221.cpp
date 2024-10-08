@@ -96,6 +96,7 @@ int main()
     Point<int> pt(1, 1);
     s.push(pt); //добавить в стек копию lvalue
     s.push(Point(2, 2)); //переместить в стек из rvalue
+    s.push_emplace(3, 3);
     Point pt1(4, 4);
     s.push(pt, Point(5, 5), pt1, Point(6, 6));
     MyStack <Point<int>> s1(pt, Point(7, 7), pt1, Point(8, 8));

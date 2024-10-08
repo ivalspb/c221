@@ -42,6 +42,16 @@ public:
 		if constexpr (sizeof...(args) > 0)
 			this->push(std::forward<Types>(args)...);
 	}
+
+	template <typename T, typename... Types>
+	void push_emplace(Types&&... args)
+	{
+		void* mem = new char[sizeof(Node)];
+		Node*n= new(mem)Node(std::forward<Node<T>>(args)...);
+		n->next = m_head.next;
+		m_head.next = n;
+	}
+
 	template <typename... Types>
 	MyStack(Types&&... args)
 	{
