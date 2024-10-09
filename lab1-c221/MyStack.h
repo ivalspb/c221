@@ -8,48 +8,44 @@ class MyStack
 	class Node
 	{
 		friend class MyStack;
-		T val;
+		T val{};
 		Node* next = nullptr;
 	public:
-		Node() :val(T{}) {};
-		Node(T& _val) : val(_val) {};
-		Node(T&& _val) : val(std::move(_val)) {};
+		Node() =default;
+		template<typename... Types>
+		Node(Node* head, Types&&... args):val(std::forward<Types>(args)...)
+		{
+			next = head->next;
+			head->next = this;
+		}
 	};
 	Node m_head;
 public:
 	MyStack() {};
-	/*void push(T&& v)
-	{
-		Node* n = new Node(std::forward<T>(v));
-		n->next = m_head.next;
-		m_head.next = n;
-	}*/
-	void pop()
+	
+	T pop()
 	{
 		if (m_head.next)
 		{
 			Node* tmp = m_head.next->next;
+			T res = m_head.val;
 			delete m_head.next;
 			m_head.next = tmp;
+			return res;
 		}
+		else return T{};
 	}
-	template <typename T, typename... Types>
-	void push(T&& v, Types&&... args)
+	template <typename... Types>
+	void push(Types&&... args)
 	{
-		Node* n = new Node(std::forward<T>(v));
-		n->next = m_head.next;
-		m_head.next = n;
-		if constexpr (sizeof...(args) > 0)
-			this->push(std::forward<Types>(args)...);
+		(new Node(&m_head,args),...);
 	}
 
-	template <typename T, typename... Types>
+	template <typename... Types>
 	void push_emplace(Types&&... args)
 	{
-		void* mem = new char[sizeof(Node)];
-		Node*n= new(mem)Node(std::forward<Node<T>>(args)...);
-		n->next = m_head.next;
-		m_head.next = n;
+		void* mem = new char[sizeof...(Types)*sizeof(T)];
+		Node* n = new(mem)Node(&m_head, std::forward<Types>(args)...);
 	}
 
 	template <typename... Types>

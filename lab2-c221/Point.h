@@ -10,9 +10,9 @@ public:
 	Point() = default;
 	Point(const T& x, const T& y) : x(x), y(y) {};
 	Point(T&& x, T&& y) : x(std::move(x)), y(std::move(y)) {};
-	std::ostream& operator<<(std::ostream& os, const Point& obj)
+	friend std::ostream& operator<<(std::ostream& os, const Point& obj)
 	{
-		os << "(" << x << "," << y << ")";
+		os << "(" << obj.x << "," << obj.y << ")";
 		return os;
-	}
+	};
 };

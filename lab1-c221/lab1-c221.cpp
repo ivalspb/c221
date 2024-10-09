@@ -24,7 +24,7 @@ constexpr void InsertUnique(vector<U>& v, T&& current, Types&&... rest)
     {
         auto d = find(v.begin(), v.end(), static_cast<U>(current));
         if (d == v.end())
-            v.push_back(current);
+            v.push_back(std::forward<T>(current));
     }
     if constexpr (sizeof...(rest) > 0)
         InsertUnique(v, forward<Types>(rest)...);
