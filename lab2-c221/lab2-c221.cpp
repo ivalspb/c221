@@ -1,6 +1,7 @@
 ﻿#include <tuple>
 #include <iostream>
 #include "Point.h"
+#include "library.h"
 
 template <typename T,size_t N=std::tuple_size_v<T>>
 void printTuple(const T& t)
@@ -50,6 +51,11 @@ int main()
     std::cout<<std::endl<<"#1 stream:\n"<<t1 << std::endl << "#2" << std::endl<<t2<<std::endl;
 
     printTuple_s(t1);
+
+    library lEmpty;
+    book my_favorite_book{ "Willims","Parallel C++", 2014 };
+    library l = { {"Straustrup", "C++", 2000}, my_favorit_book };
+
 
 }
 
