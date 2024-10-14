@@ -130,9 +130,11 @@
   <ItemGroup>
     <ClCompile Include="book.cpp" />
     <ClCompile Include="lab2-c221.cpp" />
+    <ClCompile Include="library.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="book.h" />
+    <ClInclude Include="library.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
