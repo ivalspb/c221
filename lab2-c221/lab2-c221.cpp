@@ -54,7 +54,7 @@ int main()
 
     library lEmpty;
     book my_favorite_book{ "Willims","Parallel C++", 2014 };
-    library l = { {"Straustrup", "C++", 2000}, my_favorit_book };
+    library<book> l = { {"Straustrup", "C++", 2000}, my_favorite_book };
 
 
 }

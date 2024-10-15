@@ -2,15 +2,17 @@
 #include "book.h"
 #include <list>
 #include <map>
+#include <utility>
 
+template <typename T=book&>
 class library
 {
-	std::map<book&, size_t> lb;
+	std::map<T&&, size_t> lb;
 public:
 	library() = default;
 	
 	template <typename... Types>
-	library(Types&&... args)
+	library(const Types&&... args)
 	{
 		if constexpr (sizeof...(args) > 0)
 			(lb[std::forward<Types>(args)]++, ...);
