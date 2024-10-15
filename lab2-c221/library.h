@@ -3,18 +3,25 @@
 #include <list>
 #include <map>
 
-template <typename T=book>
 class library
 {
-	std::map<T&&, size_t> lb;
+	std::map<book&, size_t> lb;
 public:
 	library() = default;
-	template <typename U=book, typename... Types>
-	library(U&& b1, Types&&... books)
+	
+	template <typename... Types>
+	library(Types&&... args)
 	{
-		lb[std::forward<U>b1]++;
-		if constexpr (sizeof...(books) > 0)
-			library<Types>(std::forward<Types>(books));
+		if constexpr (sizeof...(args) > 0)
+			(lb[std::forward<Types>(args)]++, ...);
 	}
+
+	/*template <book& b1, book&... Types>
+	library(const book& b1, const Types books)
+	{
+		lb[b1]++;
+		if constexpr (sizeof...(books) > 0)
+			library<Types>(books...);
+	}*/
 };
 
