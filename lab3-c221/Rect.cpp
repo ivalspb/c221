@@ -6,10 +6,10 @@ size_t Rect::getSq() const
     return abs(l-r)*abs(t-b);
 }
 
-void Rect::setClr(Color c)
-{
-    static_cast<Shape>(*this).setClr(c);
-}
+//void Rect::setClr(Color c)
+//{
+//    this->Shape::setClr(c);
+//}
 
 Color Rect::Clr() const
 {
@@ -19,9 +19,9 @@ Color Rect::Clr() const
 std::strong_ordering Rect::operator<=>(const Rect& other) const
 {
     if (this->getSq() == other.getSq()) 
-        return this->Shape::operator<=>(static_cast<Shape>(other));
+        return this->Shape::operator<=>(other);
     else return this->getSq() <=> other.getSq();
-}
+}   
 
 std::ostream& operator<<(std::ostream& os, const Rect& r)
 {
