@@ -13,7 +13,7 @@ int main()
 		ar[i+1]=ar[i] = {rand() % 100,rand() % 100, rand() % 100, rand() % 100, Color(rand() % 3)};
 		ar[i + 1].setClr(Color::Red);
 	}
-	std::cout << "\nBefore sorting\n";
+	std::cout << "Before sorting\n";
 	for (auto& x : ar)
 	{
 		std::cout << x << "\tSquare = " << x.getSq() << std::endl;

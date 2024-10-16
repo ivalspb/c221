@@ -6,7 +6,7 @@ enum Color { Red, Green, Blue };
 
 class Shape
 {
-	Color c;
+	Color c=Color::Red;
 public:
 	Shape() = default;
 	Shape(const Color& c) :c(c) {}

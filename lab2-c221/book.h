@@ -2,6 +2,8 @@
 #include <tuple>
 #include <string>
 #include <utility>
+#include <iostream>
+#include "tuple_print.h"
 
 class book
 {
@@ -33,5 +35,7 @@ public:
 	}
 	auto operator<=>(const book& other) const = default;
 	
+	friend std::ostream& operator<<(std::ostream& os, const book& b);
+
 };
 
