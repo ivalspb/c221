@@ -54,8 +54,14 @@ int main()
 
     library lEmpty;
     book my_favorite_book{ "Willims","Parallel C++", 2014 };
-    library<book> l = { {"Straustrup", "C++", 2000}, my_favorite_book };
 
+    library l = { book{"Straustrup", "C++", 2000}, my_favorite_book};
+    //library<book> l2 = { book{"Straustrup", "C++", 2000}, my_favorite_book,book{"Straustrup", "C++", 2000} };
+    //library<book> l3 = { book{"Straustrup", "C++", 2000}};
+    //library<book> l4 = {  my_favorite_book,my_favorite_book,my_favorite_book };
 
+    l.add( book{"Straustrup", "C++", 2000}, book{"Straustrup", "C++", 2010}, book{"Golovic", "Advanced", 2008} );
+    l.ByAuthor();
+    l.ByTitle();
 }
 
