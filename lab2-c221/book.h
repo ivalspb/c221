@@ -16,23 +16,6 @@ public:
 	std::string get_title() const { return std::get<1>(data); }
 	size_t get_year() const { return std::get<2>(data); }
 
-	auto compare(const book& other, const size_t index = 0) const
-	{
-
-		//switch (index)
-		//{
-		//default:
-		//	return data <=> other.data;
-		//	//break;
-		//case 1:
-		//	if (std::get<1>(data) == std::get<1>(other.data)) return data <=> other.data;
-		//	return std::get<1>(data) <=> std::get<1>(other.data);
-		//	//break;
-		//case 2:
-		//	return std::get<2>(data) <=> std::get<2>(other.data);
-
-		//}
-	}
 	auto operator<=>(const book& other) const = default;
 	
 	friend std::ostream& operator<<(std::ostream& os, const book& b);

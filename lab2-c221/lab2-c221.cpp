@@ -36,6 +36,10 @@ int main()
     calc['-'] = std::minus<double>();
     calc['*'] = my_multiply<double>();
     calc['/'] = [](double a1, double a2) {return a1 / a2; };
-    calc['^'] =  std::pow;
+    calc['^'] =  std::pow<double,double>;
+    //[[maybe_unused]] double integ;
+	//calc['%'] = std::bind(std::modf, std::bind(std::divides<double>(), std::placeholders::_1, std::placeholders::_2), &integ);
+	calc['%'] = std::bind(std::fmodf, std::placeholders::_1, std::placeholders::_2);
+
 }
 
