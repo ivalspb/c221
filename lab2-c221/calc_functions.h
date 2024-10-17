@@ -15,3 +15,21 @@ struct my_multiply
 		return m1 * m2;
 	}
 };
+
+//template <typename T>
+class my_compare
+{
+public:
+	double operator()(const double& g1, const double& g2)
+	{
+		if (g1 > g2)
+			return g1;
+		else return g2;
+	}
+	double greater(const double& g1, const double& g2) const
+	{
+		if (g1 > g2) 
+			return g1;
+		else return g2;
+	}
+};

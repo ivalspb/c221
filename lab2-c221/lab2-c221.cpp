@@ -40,6 +40,7 @@ int main()
     //[[maybe_unused]] double integ;
 	//calc['%'] = std::bind(std::modf, std::bind(std::divides<double>(), std::placeholders::_1, std::placeholders::_2), &integ);
 	calc['%'] = std::bind(std::fmodf, std::placeholders::_1, std::placeholders::_2);
-
+    calc['?'] = std::bind(&my_compare::greater, std::placeholders::_1, std::placeholders::_2);
+    //calc['?'] = std::bind(my_compare(), std::placeholders::_1, std::placeholders::_2);
 }
 
