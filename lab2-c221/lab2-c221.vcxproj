@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="book.h" />
+    <ClInclude Include="calc_functions.h" />
     <ClInclude Include="library.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="tuple_print.h" />

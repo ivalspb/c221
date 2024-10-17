@@ -6,11 +6,6 @@ size_t Rect::getSq() const
     return abs(l-r)*abs(t-b);
 }
 
-//void Rect::setClr(Color c)
-//{
-//    this->Shape::setClr(c);
-//}
-
 Color Rect::Clr() const
 {
     return static_cast<Shape>(*this).Clr();

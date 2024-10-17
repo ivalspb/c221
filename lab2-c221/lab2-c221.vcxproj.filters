@@ -38,5 +38,8 @@
     <ClInclude Include="tuple_print.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="calc_functions.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

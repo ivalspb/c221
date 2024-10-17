@@ -1,7 +1,10 @@
 ﻿#include "tuple_print.h"
 #include "Point.h"
 #include "library.h"
-
+#include <functional>
+#include "calc_functions.h"
+#include <map>
+#include <cmath>
 
 
 int main()
@@ -27,5 +30,12 @@ int main()
     l.add( book{"Straustrup", "C++", 2000}, book{"Straustrup", "C++", 2010}, book{"Golovic", "xAdvanced", 2008} );
     l.ByAuthor();
     l.ByTitle();
+
+    std::map<char, std::function<double(double, double)>>calc;
+    calc['+'] = my_sum<double>;
+    calc['-'] = std::minus<double>();
+    calc['*'] = my_multiply<double>();
+    calc['/'] = [](double a1, double a2) {return a1 / a2; };
+    calc['^'] =  std::pow;
 }
 
