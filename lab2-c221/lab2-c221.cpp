@@ -3,6 +3,7 @@
 #include "library.h"
 #include <functional>
 #include "calc_functions.h"
+#include "my_range.h"
 #include <map>
 #include <cmath>
 
@@ -40,7 +41,21 @@ int main()
     //[[maybe_unused]] double integ;
 	//calc['%'] = std::bind(std::modf, std::bind(std::divides<double>(), std::placeholders::_1, std::placeholders::_2), &integ);
 	calc['%'] = std::bind(std::fmodf, std::placeholders::_1, std::placeholders::_2);
-    calc['?'] = std::bind(&my_compare::greater, std::placeholders::_1, std::placeholders::_2);
-    //calc['?'] = std::bind(my_compare(), std::placeholders::_1, std::placeholders::_2);
+    //calc['?'] = std::bind(&my_compare::greater, std::placeholders::_1, std::placeholders::_2);
+    calc['?'] = std::bind(my_compare(), std::placeholders::_1, std::placeholders::_2);
+
+    std::function<size_t(size_t)>nature_series_sum = [&nature_series_sum](size_t x)
+        {
+            return x < 2 ? 1 : x + nature_series_sum(x - 1);
+        };
+    std::cout << "Enter number for natural series sum calculation: ";
+    size_t x;
+    std::cin >> x;
+    std::cout << "\n Sum of natural series of " << x << " = " << nature_series_sum(x);
+
+    bool check_range = InRange(10, 20, 1, 15, 30);    // --> false 
+    check_range = InRange(10, 20, 11, 12, 13);   // --> true
+    check_range = InRange(5.0, 5.5, 5.1, 5.2, 5.3); // --> true
+
 }
 
