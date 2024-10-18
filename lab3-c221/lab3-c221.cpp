@@ -6,6 +6,8 @@
 #include <string_view>
 #include <string>
 #include <set>
+#include "str_derived_vector.h"
+
 
 int main()
 {
@@ -45,7 +47,9 @@ int main()
 	//Реализуйте функцию, которая «разбивает» исходную строку на отдельные слова и 
 	// создает из этих строк std::vector  - "abc”,  “12345”, “cat”, “dog”, “bird". 
 	// Строки копировать нельзя!
-	const char* s = "abc 12345 cat dog bird";
+	const char* s1 = "abc 12345 cat dog bird";
+	//const std::string s = "abc 12345 cat dog bird";
 
+	std::vector<std::string_view> words=make_str_vec(s1);
 }
 
