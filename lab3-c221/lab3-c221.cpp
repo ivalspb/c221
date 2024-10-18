@@ -48,8 +48,11 @@ int main()
 	// создает из этих строк std::vector  - "abc”,  “12345”, “cat”, “dog”, “bird". 
 	// Строки копировать нельзя!
 	const char* s1 = "abc 12345 cat dog bird";
-	//const std::string s = "abc 12345 cat dog bird";
+	const std::string s2 = "abc 12345 cat dog bird";
 
-	std::vector<std::string_view> words=make_str_vec(s1);
+	std::vector<std::string_view> words=make_str_vec(s2);
+	std::cout << "\nWords list:";
+	for (auto& word : words)
+		std::cout << std::endl << word;
 }
 
