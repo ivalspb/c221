@@ -32,5 +32,8 @@
     <ClInclude Include="Rect.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="str_derived_vector.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
