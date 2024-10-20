@@ -19,7 +19,8 @@ std::vector<std::string_view> make_str_vec_smpl(T& arg)
 		res.push_back( std::string_view(word_begin,*i));
 		word_begin = (*i) + 1;
 	}
-	res.push_back(std::string_view(word_begin, s.end()));
+	if(word_begin!=s.end())
+		res.push_back(std::string_view(word_begin, s.end()));
 	return res;
 }
 
@@ -33,6 +34,5 @@ std::vector<std::string_view> make_str_vec(T& arg, Types&... args)
 		tmp_s = make_str_vec(args...);
 		s.insert(s.end(), tmp_s.begin(), tmp_s.end() );
 	}
-	//((s.insert(tmp_s.begin(), tmp_s.end(), s.end())), ...);
 	return s;
 }

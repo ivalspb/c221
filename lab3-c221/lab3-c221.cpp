@@ -50,7 +50,7 @@ int main()
 	const char* s1 = "The first string ... ";
 	const std::string s2 = "abc 12345 cat dog bird";
 
-	std::vector<std::string_view> words=make_str_vec(s1,s2,str);
+	std::vector<std::string_view> words=make_str_vec(s1,s2,ar1,p,s);
 	std::cout << "\nWords list:";
 	for (auto& word : words)
 		std::cout << std::endl << word;
