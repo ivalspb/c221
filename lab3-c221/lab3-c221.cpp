@@ -7,7 +7,7 @@
 #include <string>
 #include <set>
 #include "str_derived_vector.h"
-
+#include "my_optional.h"
 
 int main()
 {
@@ -54,5 +54,10 @@ int main()
 	std::cout << "\nWords list:";
 	for (auto& word : words)
 		std::cout << std::endl << word;
+
+	std::vector v{ 1,2,3,4,5 };
+	std::optional<size_t> id1 = get_index_by_abs_value(v, 3);
+	std::optional<size_t> id2 = get_index_by_abs_value(v, 6);
+	std::optional<size_t> id3 = get_index_by_abs_value(v, -2);
 }
 
