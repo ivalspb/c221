@@ -8,6 +8,7 @@
 #include <set>
 #include "str_derived_vector.h"
 #include "my_optional.h"
+#include "person.h"
 
 int main()
 {
@@ -59,5 +60,13 @@ int main()
 	std::optional<size_t> id1 = get_index_by_abs_value(v, 3);
 	std::optional<size_t> id2 = get_index_by_abs_value(v, 6);
 	std::optional<size_t> id3 = get_index_by_abs_value(v, -2);
+
+	std::vector<person> persons{ person{"Nikolay",36,"nik"},person{"Erofey",58},person{"Anna",40,"Ann"},person{"Nikolay",36} };
+	for (auto& i : persons) std::cout << std::endl << i;
+	std::sort(persons.begin(), persons.end());
+	std::cout << "\nSorted:\n";
+	for (auto& i : persons) std::cout << std::endl << i;
+
+
 }
 
