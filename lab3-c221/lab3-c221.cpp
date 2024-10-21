@@ -9,6 +9,10 @@
 #include "str_derived_vector.h"
 #include "my_optional.h"
 #include "person.h"
+#include "dog.h"
+#include "cat.h"
+#include <list>
+#include <variant>
 
 int main()
 {
@@ -67,6 +71,11 @@ int main()
 	std::cout << "\nSorted:\n";
 	for (auto& i : persons) std::cout << std::endl << i;
 
-
+	std::list<std::variant<cat, dog>>animal_l;
+	animal_l.push_back(cat("Musya"));
+	animal_l.push_back(dog("Sharik"));
+	for (auto i : animal_l)
+		//std::cout << i;
+		std::visit([](const auto& x) {std::cout << x; }, i);
 }
 
