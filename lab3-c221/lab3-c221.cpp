@@ -13,6 +13,8 @@
 #include "cat.h"
 #include <list>
 #include <variant>
+#include "my_time.h"
+
 
 int main()
 {
@@ -84,5 +86,10 @@ int main()
 		std::visit([](const auto& x) {std::cout << x; }, i);
 	}
 	std::cout  << cats << " Cats and " << dogs << " Dogs";
+
+	std::time_t t = std::time(0);   // get time now
+	std::tm* now = std::localtime(&t);
+
+
 }
 

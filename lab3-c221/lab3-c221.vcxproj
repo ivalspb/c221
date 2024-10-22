@@ -139,6 +139,7 @@
     <ClInclude Include="cat.h" />
     <ClInclude Include="dog.h" />
     <ClInclude Include="my_optional.h" />
+    <ClInclude Include="my_time.h" />
     <ClInclude Include="person.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Shape.h" />
