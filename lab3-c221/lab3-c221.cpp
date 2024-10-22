@@ -74,8 +74,15 @@ int main()
 	std::list<std::variant<cat, dog>>animal_l;
 	animal_l.push_back(cat("Musya"));
 	animal_l.push_back(dog("Sharik"));
+	animal_l.push_back(dog("Buldog"));
+	std::cout << "\n\nAnimals list:\n";
+	size_t cats = 0, dogs = 0;
 	for (auto i : animal_l)
-		//std::cout << i;
+	{
+		if (std::get_if<cat>(&i)) cats++;
+		else dogs++;
 		std::visit([](const auto& x) {std::cout << x; }, i);
+	}
+	std::cout  << cats << " Cats and " << dogs << " Dogs";
 }
 
