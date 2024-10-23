@@ -87,9 +87,11 @@ int main()
 	}
 	std::cout  << cats << " Cats and " << dogs << " Dogs";
 
-	std::time_t t = std::time(0);   // get time now
-	std::tm* now = std::localtime(&t);
-
-
+	auto prnt = [](const auto& a) {std::cout << a << ":"; };
+	std::cout << "\nPrinting current date:\n";
+	std::visit(prnt, get_my_date(What::Day));
+	std::visit(prnt, get_my_date(What::Month));
+	std::visit(prnt, get_my_date(What::Year));
+	std::visit(prnt, get_my_date(What::WeekDay));
 }
 
