@@ -93,5 +93,13 @@ int main()
 	std::visit(prnt, get_my_date(What::Month));
 	std::visit(prnt, get_my_date(What::Year));
 	std::visit(prnt, get_my_date(What::WeekDay));
+	//	std::visit(prnt, get_my_date(What::Day), get_my_date(What::Month), get_my_date(What::Year), get_my_date(What::WeekDay));
+
+	using V_CLR = std::variant<int, double, Color>;
+	std::vector<V_CLR> v_color{1,Color::Green,2.3, 44, Color::Red,3.14};
+	std::cout << "\n\nPrinting color variant:\n";
+	for (const auto& i : v_color)
+		std::visit(Prn_V_CLR(), i);
+
 }
 
