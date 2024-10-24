@@ -14,6 +14,7 @@
 #include <list>
 #include <variant>
 #include "my_time.h"
+#include "my_array.h"
 
 
 int main()
@@ -100,6 +101,18 @@ int main()
 	std::cout << "\n\nPrinting color variant:\n";
 	for (const auto& i : v_color)
 		std::visit(Prn_V_CLR(), i);
+	
+	auto a1 = my_ar_get(ar, 3);
+	auto a2 = my_ar_get(ar, rand() % 10);
+	auto a3 = my_ar_get(ar, 10);// error: out of range
+	std::cout << "\n\nRandomly accessed elements:\n";
+	if (a1)	std::cout << *a1 << "\n";
+	else std::cout << "index Out of range\n";
+	if (a2)	std::cout << *a2 << "\n";
+	else std::cout << "index Out of range\n";
+	if (a3)	std::cout << *a3;
+	else std::cout << "index Out of range\n";
 
+	return 0;
 }
 
