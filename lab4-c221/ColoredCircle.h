@@ -14,7 +14,9 @@ public:
 	ColoredCircle(const Color c, const int x, const int y, const int r ):m_col(c),m_x(x),m_y(y),m_r(r){}
 	Color getColor() const;
 	double getSquare() const;
-	int getRadius() const;
+	int& Radius();
+	//void setRadius(const int new_r);
+
 	double getDist() const;
 
 	friend std::ostream& operator<<(std::ostream& os, const ColoredCircle& c);

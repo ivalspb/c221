@@ -10,10 +10,15 @@ double ColoredCircle::getSquare() const
     return M_PI*m_r;
 }
 
-int ColoredCircle::getRadius() const
+int& ColoredCircle::Radius() 
 {
     return m_r;
 }
+
+//void ColoredCircle::setRadius(const int new_r)
+//{
+//    m_r = new_r;
+//}
 
 double ColoredCircle::getDist() const
 {
