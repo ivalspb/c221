@@ -16,6 +16,8 @@ public:
 	double getSquare() const;
 	int& Radius();
 	//void setRadius(const int new_r);
+	int& X();
+	int& Y();
 
 	double getDist() const;
 

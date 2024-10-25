@@ -20,6 +20,16 @@ int& ColoredCircle::Radius()
 //    m_r = new_r;
 //}
 
+int& ColoredCircle::X()
+{
+	return m_x; 
+}
+
+int& ColoredCircle::Y()
+{
+	return m_y;
+}
+
 double ColoredCircle::getDist() const
 {
     return sqrt(m_x*m_x+m_y*m_y);
