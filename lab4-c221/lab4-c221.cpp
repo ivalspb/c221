@@ -4,7 +4,8 @@
 #include <ranges>
 #include "ColoredCircle.h"
 #include <algorithm>
-
+#include <functional>
+#include "ColoredRect.h"
 int main()
 {
 	std::srand(std::time(0));
@@ -49,14 +50,34 @@ int main()
 				&& (in_c.Y() - in_c.Radius() >= out_c.Y() - out_c.Radius())
 				&& (in_c.Y() + in_c.Radius() <= out_c.Y() + out_c.Radius());
 		};
-	std::ranges::copy_if(v_c, std::back_inserter(v2), [](ColoredCircle& c) {return c.Radius() > 10 && c.getColor() == Blue})
-	//только с заданным цветом
+	//std::ranges::copy_if(v_c, std::back_inserter(v2), [&c1](auto& x) {return innerCircle(x, c1); });
+	std::ranges::copy_if(v_c, std::back_inserter(v2), std::bind(innerCircle,std::placeholders::_1,c1));
+	std::cout << "\nCopy only circles that in circle " << c1 << std::endl;
+	for (const auto& i : v2) std::cout << i << std::endl;
 
-	/*std::vector<std::variant<ColoredRect, ColoredCircle>> vv;
-	vv.push_back(ColoredCircle{ 1,2,3,Blue });
-	vv.push_back(ColoredRect{ 1,2,3,4,Red });
-	vv.push_back(ColoredCircle{ 34,55,8,Green });
-	vv.push_back(ColoredRect{ 10,22,30,40,Green });
-	vv.push_back(ColoredCircle{ 11,22,33,Red });
-	vv.push_back(ColoredRect{ 1,20,35,45,Green });*/
+	//только с заданным цветом
+	std::cout << "\nAdd to this set another RED circles from original set:\n";
+	//std::ranges::copy_if(v_c, std::back_inserter(v2), [](Color& c1) {return c1 == Color::Red; }, &ColoredCircle::getColor);
+	std::ranges::copy_if(v_c, std::back_inserter(v2), [&v2](ColoredCircle& c1) 
+		{return (c1.getColor() == Color::Red)&&(std::find(v2.begin(),v2.end(), c1) == v2.end()); });
+	for (const auto& i : v2) std::cout << i << std::endl;
+
+	std::vector<std::variant<ColoredRect, ColoredCircle>> vv;
+	vv.push_back(ColoredCircle{ Color::Blue, 1,2,3 });
+	vv.push_back(ColoredRect{ Color::Red, 1,2,3,4});
+	vv.push_back(ColoredCircle{ Color::Green, 34,55,8});
+	vv.push_back(ColoredRect{ Color::Blue, 10,22,30,40});
+	vv.push_back(ColoredCircle{ Color::Green, 11,22,33 });
+	vv.push_back(ColoredRect{ Color::Green, 1,20,35,45 });
+	std::cout << "\nCreated mixed vector:\n";
+	for (const auto& i : vv) 
+		std::visit([](const auto& a) {std::cout << a << std::endl; },i);
+	std::ranges::sort(vv, {}, [](auto const& x) {return std::visit([](auto const& e) {return e.getSquare(); }, x); });
+	std::cout << "\nSorted vector of circles and rect by square:\n";
+	for (const auto& i : vv)
+		std::visit([](const auto& a) {std::cout << a <<" with square = "<<a.getSquare() << std::endl; }, i);
+	std::ranges::sort(vv, {}, [](auto const& x) {return std::visit([](auto const& e) {return e.getColor(); }, x); });
+	std::cout << "\nSorted vector of circles and rect by color:\n";
+	for (const auto& i : vv)
+		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
 }

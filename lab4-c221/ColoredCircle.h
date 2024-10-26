@@ -2,8 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-
-enum Color {Red, Green, Blue};
+#include "Color.h"
 
 class ColoredCircle
 {
@@ -20,6 +19,8 @@ public:
 	int& Y();
 
 	double getDist() const;
+
+	auto operator<=>(const ColoredCircle& other) const = default;
 
 	friend std::ostream& operator<<(std::ostream& os, const ColoredCircle& c);
 };

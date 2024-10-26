@@ -129,10 +129,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ColoredCircle.cpp" />
+    <ClCompile Include="ColoredRect.cpp" />
     <ClCompile Include="lab4-c221.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ColoredCircle.h" />
+    <ClInclude Include="ColoredRect.h" />
+    <ClInclude Include="Color.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

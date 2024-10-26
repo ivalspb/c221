@@ -38,7 +38,8 @@ double ColoredCircle::getDist() const
 std::ostream& operator<<(std::ostream& os, const ColoredCircle& c)
 {
     const char* colors[]{ "RED","GREEN","BLUE" };
-    os << "x = " << c.m_x
+	os << "Circle:"
+       << "\tx = " << c.m_x
        << "\ty = " << c.m_y
        << "\tr = " << c.m_r
        << "\tColor = " << colors[c.m_col];
