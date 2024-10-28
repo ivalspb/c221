@@ -80,4 +80,13 @@ int main()
 	std::cout << "\nSorted vector of circles and rect by color:\n";
 	for (const auto& i : vv)
 		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
+
+	auto red_circles = std::views::filter(v_c, [](ColoredCircle& c) {return c.getColor() == Color::Red; });
+	std::cout << "\nView RED circles from original set:\n";
+	for (const auto& i : red_circles) std::cout << i << std::endl;
+
+	auto in_cicle = std::views::filter(v_c, std::bind(innerCircle, std::placeholders::_1, c1));
+	std::cout << "\nView only circles that in circle " << c1 << std::endl;
+	for (const auto& i : in_cicle) std::cout << i << std::endl;
+
 }
