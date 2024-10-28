@@ -89,4 +89,12 @@ int main()
 	std::cout << "\nView only circles that in circle " << c1 << std::endl;
 	for (const auto& i : in_cicle) std::cout << i << std::endl;
 
+
+	auto green_shapes = std::views::filter(vv,
+		[](auto const& var)	{return	std::visit([](auto const& e) {return e.getColor(); }, var) == Color::Green; });
+	std::cout << "\nVector of circles and rect of Green color:\n";
+	for (const auto& i : green_shapes)
+		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
+
+
 }
