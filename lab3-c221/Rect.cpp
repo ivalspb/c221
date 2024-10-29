@@ -6,9 +6,11 @@ size_t Rect::getSq() const
     return abs(l-r)*abs(t-b);
 }
 
-Color Rect::Clr() const
+std::strong_ordering Rect::operator<=>(const Shape& other) const noexcept
 {
-    return static_cast<Shape>(*this).Clr();
+    if (this->getSq() == other.getSq())
+        return this->Shape::operator<=>(other);
+    else return this->getSq() <=> other.getSq();
 }
 
 std::strong_ordering Rect::operator<=>(const Rect& other) const
@@ -24,6 +26,6 @@ std::ostream& operator<<(std::ostream& os, const Rect& r)
         << "\tright = " << r.r
         << "\ttop = " << r.t
         << "\tbottom = " << r.b
-        <<  static_cast<Shape>(r);
+        <<  static_cast<const Shape&>(r);
     return os;
 }

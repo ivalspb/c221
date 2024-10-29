@@ -38,11 +38,8 @@ int main()
     calc['*'] = my_multiply<double>();
     calc['/'] = [](double a1, double a2) {return a1 / a2; };
     calc['^'] =  std::pow<double,double>;
-    //[[maybe_unused]] double integ;
-	//calc['%'] = std::bind(std::modf, std::bind(std::divides<double>(), std::placeholders::_1, std::placeholders::_2), &integ);
 	calc['%'] = std::bind(std::fmodf, std::placeholders::_1, std::placeholders::_2);
-    //calc['?'] = std::bind(&my_compare::greater, std::placeholders::_1, std::placeholders::_2);
-    calc['?'] = std::bind(my_compare(), std::placeholders::_1, std::placeholders::_2);
+    calc['?'] = std::bind(&my_compare::greater, my_compare(), std::placeholders::_1, std::placeholders::_2);
 
     std::function<size_t(size_t)>nature_series_sum = [&nature_series_sum](size_t x)
         {

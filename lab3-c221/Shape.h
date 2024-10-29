@@ -2,7 +2,9 @@
 #include <compare>
 #include <iostream>
 
-enum Color { Red, Green, Blue };
+static enum Color { Red, Green, Blue };
+
+static const char* color_s[]={ "Red","Green","Blue" };
 
 class Shape
 {
@@ -11,7 +13,9 @@ public:
 	Shape() = default;
 	Shape(const Color& c) :c(c) {}
 	virtual void setClr(const Color& new_clr);
+
+	virtual size_t getSq() const =0;
 	virtual Color Clr() const;
-	virtual std::strong_ordering  operator<=>(const Shape& other) const = default;
+	virtual std::strong_ordering  operator<=>(const Shape& other) const noexcept = default;
 	friend std::ostream& operator<<(std::ostream& os, const Shape& s);
 };

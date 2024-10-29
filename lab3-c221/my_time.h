@@ -4,9 +4,10 @@
 
 #pragma warning(disable : 4996)
 
-enum What { Year, Month, Day, WeekDay };
+static enum What { Year, Month, Day, WeekDay };
+static const char* week_days_s[] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
-using D_res_var = std::variant<int, const char*>;
+using D_res_var = std::variant<int, int, int, const char*>;// 0 = Year, 1 = Month, 2 = Day, 3 = WeekDay
 
 D_res_var get_my_date(const What& w)
 {
@@ -18,38 +19,16 @@ D_res_var get_my_date(const What& w)
 	switch (w)
 	{
 	case What::Day:
-		res = now->tm_mday;
+		res.emplace<2>(now->tm_mday);
 		break;
 	case What::Month:
-		res = now->tm_mon+1;
+		res.emplace<1>(now->tm_mon + 1);
 		break;
 	case What::Year:
-		res = now->tm_year+1900;
+		res.emplace<0>(now->tm_year + 1900);
 		break;
 	case What::WeekDay:
-		switch (now->tm_wday)
-		{
-		case 1:
-			res = "Monday";
-			break;
-		case 2:
-			res = "Tuesday";
-			break;
-		case 3:
-			res = "Wednesday";
-			break;
-		case 4:
-			res = "Thursday";
-			break;
-		case 5:
-			res = "Friday";
-			break;
-		case 6:
-			res = "Saturday";
-			break;
-		case 0:
-			res = "Sunday";
-		}
+		res.emplace<3>(week_days_s[now->tm_wday]);
 	}
 	return res;
 }

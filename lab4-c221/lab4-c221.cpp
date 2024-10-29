@@ -89,6 +89,10 @@ int main()
 	std::cout << "\nView only circles that in circle " << c1 << std::endl;
 	for (const auto& i : in_cicle) std::cout << i << std::endl;
 
+	////auto sort_circle_by_square = std::views::all(v_c) | std::ranges::sort({}, [](ColoredCircle& c) {return c.getSquare(); });
+	//auto sort_circle_view_by_square = std::ranges::sort(std::views::all(v_c), {}, [](ColoredCircle& c) {return c.getSquare(); });
+	//std::cout << "\nView circles sorted by Square\n";
+	//for (const auto& i : v_c) std::cout << i << std::endl;
 
 	auto green_shapes = std::views::filter(vv,
 		[](auto const& var)	{return	std::visit([](auto const& e) {return e.getColor(); }, var) == Color::Green; });
@@ -101,5 +105,11 @@ int main()
 	std::cout << "\nVector of circles and rect of less then 50 square:\n";
 	for (const auto& i : less_shapes)
 		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
+
+	//auto sort_shapes_view_by_square = std::ranges::sort(
+	//	std::views::all(vv), {}, [](auto const& x) {return std::visit([](auto const& e) {return e.getSquare(); }, x); });
+	//std::cout << "\nSorted vector of circles and rect by square:\n";
+	//for (const auto& i : vv)
+	//	std::visit([](const auto& a) {std::cout << a << " with square = " << a.getSquare() << std::endl; }, i);
 
 }

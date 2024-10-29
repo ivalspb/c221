@@ -80,7 +80,7 @@ int main()
 	animal_l.push_back(dog("Buldog"));
 	std::cout << "\n\nAnimals list:\n";
 	size_t cats = 0, dogs = 0;
-	for (auto i : animal_l)
+	for (const auto& i : animal_l)
 	{
 		if (std::get_if<cat>(&i)) cats++;
 		else dogs++;
@@ -90,11 +90,9 @@ int main()
 
 	auto prnt = [](const auto& a) {std::cout << a << ":"; };
 	std::cout << "\nPrinting current date:\n";
-	std::visit(prnt, get_my_date(What::Day));
-	std::visit(prnt, get_my_date(What::Month));
-	std::visit(prnt, get_my_date(What::Year));
-	std::visit(prnt, get_my_date(What::WeekDay));
-	//	std::visit(prnt, get_my_date(What::Day), get_my_date(What::Month), get_my_date(What::Year), get_my_date(What::WeekDay));
+	What What_ar[]= { Day, Month, Year, WeekDay };
+	for (int i=0;i<4;i++)
+		std::visit(prnt, get_my_date(What_ar[i]));
 
 	using V_CLR = std::variant<int, double, Color>;
 	std::vector<V_CLR> v_color{1,Color::Green,2.3, 44, Color::Red,3.14};

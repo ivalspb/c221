@@ -2,7 +2,7 @@
 #include <vector>
 #include <string_view>
 
-template <typename T>
+template <typename T>//multi spaces
 std::vector<std::string_view> make_str_vec_smpl(T& arg)
 {
 	std::string_view s(arg);

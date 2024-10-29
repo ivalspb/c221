@@ -17,19 +17,6 @@ struct Prn_V_CLR
 	void operator()(auto x)const { std::cout << " " << x << " "; }
 	void operator()(Color x)const 
 	{
-		switch (x)
-		{
-		case Red:
-			std::cout << " RED ";
-			break;
-		case Green:
-			std::cout << " GREEN ";
-			break;
-		case Blue:
-			std::cout << " BLUE ";
-			break;
-		default:
-			break;
-		}
+		std::cout << " " << color_s[x] << " ";
 	}
 };
