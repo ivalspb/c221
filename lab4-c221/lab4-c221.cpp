@@ -96,5 +96,10 @@ int main()
 	for (const auto& i : green_shapes)
 		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
 
+	auto less_shapes = std::views::filter(vv,
+		[](auto const& var) {return	std::visit([](auto const& e) {return e.getSquare(); }, var) <50 ; });
+	std::cout << "\nVector of circles and rect of less then 50 square:\n";
+	for (const auto& i : less_shapes)
+		std::visit([](const auto& a) {std::cout << a << std::endl; }, i);
 
 }
